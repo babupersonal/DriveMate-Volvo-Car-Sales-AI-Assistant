@@ -1,0 +1,22 @@
+.env
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/
+dist/
+build/
+.DS_Store
+*.db
+*.sqlite
+*.sqlite3
+
+# Rebuilt locally from public document summaries
+backend/rag_index.json
+backend/rag_index.tmp
+
+.env.*
+!.env.example
+*.log
+/package-lock.json

@@ -1,0 +1,144 @@
+[
+  {
+    "id": "ex30-ac-charge",
+    "title": "EX30 AC 交流充電",
+    "model": "EX30",
+    "summary": "EX30 的 AC 交流充電可在合適的充電站、家用充電設備或符合安全要求的插座進行。充電前要讓車輛停妥，確認充電設定並使用適合的充電線。接線時要將接頭完全插入充電埠，檢查是否鎖定；充電狀態可從車內畫面或充電埠確認。如果充電不能開始，可以依原廠說明先中斷連接再重新接上；如果仍異常，應聯絡授權維修中心。不得自行改造充電器材。",
+    "source_url": "https://www.volvocars.com/tw/support/car/ex30/article/47d2c97fd33effd3c0a8cc3718c999b7-a27aa276ce5ec813c0a8b04a2b2eb5e5-8664b2fa77a7e089c0a8296870d1a409_a5ec9d18d3b36221c0a8cc375c197d5e-ec8b59f1d33539aec0a8cc374c819eab-8664b2fa77a7e089c0a8296870d1a409_8d80b038d33ba9f6c0a8cc373d93bcb1-3dda64f0d335a27dc0a8cc374599f1e0-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "AC",
+      "交流充電",
+      "家用充電",
+      "插座",
+      "充電沒反應"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "ex30-dc-charge",
+    "title": "EX30 DC 直流快充",
+    "model": "EX30",
+    "summary": "EX30 的 DC 直流快充要使用適用的充電站。DC 充電站一般有固定充電線，操作前應閱讀站方指示並確認車輛已停妥。連接充電線後，要確認充電槍已鎖定，再按充電站說明完成授權與啟動。設備可能先做安全檢查才會開始充電。公共充電槍若有磨損、碎屑或損壞，應停止使用並更換充電點，不應自行以工具處理接頭。",
+    "source_url": "https://www.volvocars.com/tw/support/car/ex30/article/47d2c97fd33effd3c0a8cc3718c999b7-a27aa276ce5ec813c0a8b04a2b2eb5e5-8664b2fa77a7e089c0a8296870d1a409_a5ec9d18d3b36221c0a8cc375c197d5e-ec8b59f1d33539aec0a8cc374c819eab-8664b2fa77a7e089c0a8296870d1a409_8d80b038d33ba9f6c0a8cc373d93bcb1-11886744d335b7dfc0a8cc373ae95b23-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "DC",
+      "快充",
+      "直流充電",
+      "充電站",
+      "充電槍"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "ex30-charge-safety",
+    "title": "EX30 充電線與高電壓安全",
+    "model": "EX30",
+    "summary": "Volvo 的 EX30 充電安全提醒：使用充電線前要確認與車輛相容，檢查接頭是否磨損、損壞或沾有異物。不要使用損壞的充電線，也不要嘗試自行修理充電線或高電壓元件。家用充電設備的安裝與修復應由合格電氣技師處理。遇到車輛碰撞、淹水、電池受損或其他高壓系統風險時，停止使用並聯絡 Volvo 授權維修中心。",
+    "source_url": "https://www.volvocars.com/tw/support/car/ex30/article/47d2c97fd33effd3c0a8cc3718c999b7-eec7a9259f5bd482c0a8b0c13b211ac8-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "充電線",
+      "安全",
+      "高電壓",
+      "維修",
+      "電池損壞"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "ex30-warning",
+    "title": "EX30 警告燈與故障指示",
+    "model": "EX30",
+    "summary": "EX30 駕駛人資訊區以警告與指示符號反映車輛狀態。紅色警告一般代表比琥珀色提示更急迫的問題，應查看車載訊息了解原因。若出現煞車、動力系統或安全氣囊等故障警示，應依照原廠說明採取安全措施並聯絡授權維修中心。本客服只提供官方文件的概括資訊，不能遠端診斷實際車況。",
+    "source_url": "https://www.volvocars.com/tw/support/car/ex30/article/fa683eafd4b47850c0a8cc3708e5f447-717b015d4b1495b9c0a8b09739ea20ee-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "警告燈",
+      "紅色燈",
+      "黃色燈",
+      "故障",
+      "儀表"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "xc60-maintenance",
+    "title": "XC60 維護保養與修理",
+    "model": "XC60",
+    "summary": "Volvo XC60 的車輛系統可依保養時程或偵測到的情況提示車主預約檢查。發現故障或收到保養通知時，應查看車輛通知並及早安排授權維修中心檢查。Volvo 建議由授權維修中心執行保養與修理，尤其高電壓與電氣零組件不應由車主自行拆修。車輛實際保養計畫及保固條件需以個別車輛的維護保養與保固資訊為準，本摘要不提供固定保固年限。",
+    "source_url": "https://www.volvocars.com/tw/support/car/xc60/article/47d2c97fd33effd3c0a8cc3718c999b7-78dc049ace167626c0a8b04a76a3614f-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "保養",
+      "回廠",
+      "維修",
+      "保養通知"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "xc60-service-booking",
+    "title": "XC60 預約維護保養或修理",
+    "model": "XC60",
+    "summary": "如果 XC60 提醒需要維護保養或維修，可以聯絡 Volvo 客服安排回廠。官方說明指出授權維修中心具備處理車輛所需的專業訓練和設備。預約保養時宜備妥車輛標準鑰匙；需要緊急處理而無法取得客服協助時，可向當地道路救援求助。DriveMate 不會代替原廠建立任何真實保養預約。",
+    "source_url": "https://www.volvocars.com/tw/support/car/xc60/article/47d2c97fd33effd3c0a8cc3718c999b7-e1fce96acdfd4ac1c0a8b04a2efd5bbc-8664b2fa77a7e089c0a8296870d1a409_47d2c97fd33effd3c0a8cc3718c999b7-78dc049ace167626c0a8b04a76a3614f-8664b2fa77a7e089c0a8296870d1a409_c8b9facdce16d6cac0a8b04a1c058084-78dc049ace167626c0a8b04a76a3614f-8664b2fa77a7e089c0a8296870d1a409/",
+    "keywords": [
+      "預約保養",
+      "預約維修",
+      "回廠",
+      "授權維修中心"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "volvo-app",
+    "title": "Volvo Cars App 的公開功能概覽",
+    "model": "ALL",
+    "summary": "Volvo Cars App 提供車輛與帳戶的部分連線功能，例如檢查車況、遠端操作車門、查閱車輛手冊、管理充電狀態、查看保養資訊或聯絡支援。功能因車型、年式、地區及軟體版本而異，不能保證每一輛 Volvo 都有全部功能。DriveMate 不連接 Volvo Cars App，也不能替顧客操作真車、查詢訂單或遠端解鎖。",
+    "source_url": "https://www.volvocars.com/tw/support/topic/f630788da0ebbfcdc0a80151116fcc96/",
+    "keywords": [
+      "Volvo Cars App",
+      "App",
+      "遠端上鎖",
+      "手機",
+      "遠端功能"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "volvo-app-connect",
+    "title": "Volvo Cars App 與車輛連接",
+    "model": "ALL",
+    "summary": "將 Volvo Cars App 連接汽車，會涉及 Volvo ID 與車內使用者檔案設定。官方建議確認手機 App 和車輛系統為適合的軟體版本。實際配對程序依車型與年式不同，應以該車型專屬手冊為準；二手車若仍綁定前車主帳號，需要按官方說明移除或聯絡客服。DriveMate 不會索取顧客的 Volvo ID 密碼。",
+    "source_url": "https://www.volvocars.com/TW/support/topic/80d6d08fba8e461a9c7f1dd98474e4ad/081757d5ef6ccf12c0a8015150732a6a/",
+    "keywords": [
+      "App連接",
+      "配對",
+      "綁定",
+      "Volvo ID",
+      "二手車"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  },
+  {
+    "id": "ex30-ota",
+    "title": "EX30 軟體無線更新說明",
+    "model": "EX30",
+    "summary": "Volvo 在 EX30 支援網站公布車輛軟體版本及更新內容。部分更新可在發布一段時間後透過無線更新 OTA 取得，實際到達時間取決於車輛與版本條件。官方的版本公告可能包含充電提醒、連線穩定性、手機整合以及安全輔助功能方面的調整。若要確認某台車是否已收到特定更新，應以車內實際軟體版本與官方支援資訊為準。",
+    "source_url": "https://www.volvocars.com/tw/support/car/ex30/software-release-notes/",
+    "keywords": [
+      "軟體",
+      "OTA",
+      "更新",
+      "版本",
+      "升級"
+    ],
+    "checked_at": "2026-11-03",
+    "data_type": "volvo_official_public_summary"
+  }
+]
