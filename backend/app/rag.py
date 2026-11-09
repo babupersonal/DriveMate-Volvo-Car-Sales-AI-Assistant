@@ -121,6 +121,10 @@ async def retrieve(question: str, top_k: int = 3, min_score: float = 0.39) -> li
     models = {m.upper() for m in MODEL_RE.findall(question)}
     # If user names a vehicle, do not cite instructions from a different model.
     possible = [c for c in index['chunks'] if not models or c['model'] in models or c['model'] == 'ALL']
+    # Questions explicitly about Volvo Cars App should use only general App documents.
+    # Avoid mixing unrelated vehicle maintenance documents into the answer.
+    if re.search(r'Volvo\s*Cars\s*App', question, re.I):
+        possible = [c for c in possible if c['model'] == 'ALL']
     if not possible:
         return []
     # Vehicle-specific maintenance or charging guidance must not silently come from

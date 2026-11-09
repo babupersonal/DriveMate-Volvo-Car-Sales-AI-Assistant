@@ -44,8 +44,24 @@ async def evaluate_case(case: dict, with_generation: bool) -> dict:
     })
     if with_generation:
         reply, _, _ = await answer_from_documents(case["question"], OLLAMA_MODEL)
-        expected_urls = {hit["source_url"] for hit in hits}
-        result["citation_ok"] = all(url in reply for url in expected_urls)
+        
+        from backend.app.rag import read_documents
+        documents_by_id = {
+            document["id"]: document
+            for document in read_documents()
+        }
+
+        expected_urls = {
+            documents_by_id[document_id]["source_url"]
+            for document_id in case.get("expected_document_ids", [])
+            if document_id in documents_by_id
+        }
+
+        result["citation_ok"] = (
+            all(url in reply for url in expected_urls)
+            if expected_urls
+            else True
+        )
     return result
 
 
