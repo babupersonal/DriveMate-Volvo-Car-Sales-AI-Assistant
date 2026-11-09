@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "architecture": "hybrid_single_agent",
+  "description": "One customer-facing agent routes work to auditable specialist components. This is not a multi-agent system.",
+  "components": [
+    {
+      "id": "vehicle_specialist",
+      "name_zh": "車型資料專員",
+      "responsibility": "依預算搜尋車型，或查詢價格、馬力、續航與官方來源。",
+      "implementation": "tool_calling",
+      "tools": ["search_vehicles", "get_vehicle_details"],
+      "data_source": "SQLite vehicles"
+    },
+    {
+      "id": "inventory_specialist",
+      "name_zh": "模擬庫存專員",
+      "responsibility": "查詢課堂使用的虛構庫存，並明確標示非真實經銷商庫存。",
+      "implementation": "tool_calling",
+      "tools": ["check_demo_stock"],
+      "data_source": "SQLite demo_stock"
+    },
+    {
+      "id": "support_specialist",
+      "name_zh": "支援文件專員",
+      "responsibility": "檢索充電、保養、警告燈與 Volvo Cars App 的公開文件摘要。",
+      "implementation": "rag_retrieval",
+      "tools": ["rag_search"],
+      "data_source": "data/rag_knowledge.json"
+    },
+    {
+      "id": "booking_handler",
+      "name_zh": "模擬試乘處理器",
+      "responsibility": "引導使用者完成表單；只有明確確認後才寫入本地模擬紀錄。",
+      "implementation": "validated_form",
+      "tools": ["demo_booking_form"],
+      "data_source": "SQLite demo_test_drives"
+    },
+    {
+      "id": "safety_router",
+      "name_zh": "安全與備援路由",
+      "responsibility": "處理提示詞注入、範圍外問題、資料不足及小模型漏呼叫工具的情況。",
+      "implementation": "deterministic_backend_rules",
+      "tools": ["fallback_router", "refusal_rules"],
+      "data_source": "backend rules"
+    }
+  ]
+}

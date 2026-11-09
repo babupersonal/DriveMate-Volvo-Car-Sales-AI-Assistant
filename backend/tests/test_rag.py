@@ -1,10 +1,22 @@
 """Local offline tests for RAG; HTTP calls are mocked, not real Ollama."""
 import asyncio
 import json
+from pathlib import Path
 
 import httpx
 
 from backend.app import rag
+
+
+def test_rag_evaluation_dataset_schema():
+    path = Path(__file__).resolve().parents[2] / "data" / "rag_eval.json"
+    cases = json.loads(path.read_text(encoding="utf-8"))
+    assert len(cases) >= 10
+    assert len({case["id"] for case in cases}) == len(cases)
+    required = {"id", "question", "expected_route", "expected_document_ids",
+                "expected_model", "expect_no_results"}
+    assert all(required <= case.keys() for case in cases)
+    assert all(case["expected_route"] in {"rag", "non_rag"} for case in cases)
 
 
 def test_documents_keep_official_provenance():

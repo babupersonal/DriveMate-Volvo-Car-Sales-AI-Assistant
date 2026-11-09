@@ -20,3 +20,6 @@ backend/rag_index.tmp
 !.env.example
 *.log
 /package-lock.json
+
+# Local evaluation output (datasets and evaluator code remain tracked)
+artifacts/*.json

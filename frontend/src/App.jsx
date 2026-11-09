@@ -9,7 +9,12 @@ const money = n => n == null ? '未知' : `NT$${Number(n).toLocaleString('zh-TW'
 async function request(url, opts={}) {
   const res=await fetch(url,opts);
   const body=await res.json().catch(()=>({}));
-  if(!res.ok) throw new Error(typeof body.detail === 'string' ? body.detail : `伺服器回應 ${res.status}`);
+  if(!res.ok) {
+    const detail=body.detail;
+    const message=typeof detail==='string' ? detail : detail?.message;
+    const code=typeof detail==='object' ? detail?.code : null;
+    throw new Error(`${message||`伺服器回應 ${res.status}`}${code?`（${code}）`:''}`);
+  }
   return body;
 }
 

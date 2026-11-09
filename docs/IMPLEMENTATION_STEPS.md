@@ -7,14 +7,17 @@
 4. 實作三個只讀工具：`search_vehicles` / `get_vehicle_details` / `check_demo_stock`。
 5. 建立 Ollama Tool Calling 代理人與五段式 System Prompt。
 6. 建立 React 介面、FastAPI API、寫入模擬試乘需求功能。
-7. 離線單元測試：10 項通過；Ollama 工具呼叫流程已用 mock 驗證。
+7. RAG 已正式完成，已有 Tool Calling、備援路由、RAG 與試乘引導。
+8. 建立 14 題 RAG 評估集，支援路由、檢索、車型隔離與引用評估。
+9. 新增匿名路由統計與穩定錯誤碼，不保存對話內容。
+10. GitHub Actions 自動執行 28 項後端測試與 React production build。
 
-## 階段二：Mac 本機實測（使用者執行）
+## 階段二：Mac 本機實測（已完成）
 1. 啟動 Ollama 和 `qwen3:1.7b`，安裝後端 requirements。
 2. 執行 `uvicorn backend.app.main:app --reload --port 8000`。
 3. 執行前端 `npm install && npm run dev`。
-4. 測試 8 組問題，紀錄 Tool Calling 是否正確。
-5. 依測試結果調整模型、提示詞與工具描述；本機小模型可能無法每次選對工具。
+4. 測試多組問題，區分 LLM Tool Calling、後端備援路由、RAG 與拒答。
+5. 依測試結果調整模型、提示詞與工具描述，並將失敗案例加入回歸測試。
 
 ## 階段三：期中報告
 1. 截圖正確查詢範例、模擬庫存正確標註的案例、查無資料/越界案例。
@@ -22,6 +25,11 @@
 3. 使用老師提供的 Word 報告範本填寫 1–4 部分與 Checklist。
 4. 上傳公開 GitHub，確認不包含 `.env`；轉存 PDF 繳交。
 
-## 自願擴充
-- 如果有足夠長的公開文字資料，再加入 RAG，與 Tool Calling 分開測試。
-- 如果之後進行階層式 Agent 研究，保留原始資料庫、工具和測試題目作為比較基準。
+## v0.5 專業化提升
+
+- `config/agent_components.json` 說明各專業元件的責任；後端會驗證這份設定。
+- `data/rag_eval.json` 保存可重跑的評估問題與預期文件。
+- `route_events` 僅記錄路由、工具、延遲及錯誤碼，不保存對話內容。
+- GitHub Actions 提供跨環境的自動回歸測試。
+
+如果之後進行階層式 Agent 研究，可保留此單 Agent 系統作為基準組，再與多 Agent 架構比較。

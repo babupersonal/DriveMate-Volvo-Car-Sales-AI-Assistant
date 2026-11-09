@@ -1,0 +1,16 @@
+[
+  {"id":"rag-01","question":"EX30 使用 DC 快充時要注意什麼？","expected_route":"rag","expected_document_ids":["ex30-dc-charge"],"expected_model":"EX30","expect_no_results":false},
+  {"id":"rag-02","question":"EX30 可以怎麼進行 AC 交流充電？","expected_route":"rag","expected_document_ids":["ex30-ac-charge"],"expected_model":"EX30","expect_no_results":false},
+  {"id":"rag-03","question":"EX30 充電接頭損壞可以自己用工具清理嗎？","expected_route":"rag","expected_document_ids":["ex30-charge-safety"],"expected_model":"EX30","expect_no_results":false},
+  {"id":"rag-04","question":"EX30 出現警告燈時應該怎麼做？","expected_route":"rag","expected_document_ids":["ex30-warning"],"expected_model":"EX30","expect_no_results":false},
+  {"id":"rag-05","question":"XC60 要如何預約回廠保養？","expected_route":"rag","expected_document_ids":["xc60-service-booking"],"expected_model":"XC60","expect_no_results":false},
+  {"id":"rag-06","question":"XC60 平常維護保養要注意什麼？","expected_route":"rag","expected_document_ids":["xc60-maintenance"],"expected_model":"XC60","expect_no_results":false},
+  {"id":"rag-07","question":"Volvo Cars App 有哪些用途？","expected_route":"rag","expected_document_ids":["volvo-app"],"expected_model":"ALL","expect_no_results":false},
+  {"id":"rag-08","question":"Volvo Cars App 要怎麼和車輛連接？","expected_route":"rag","expected_document_ids":["volvo-app-connect"],"expected_model":"ALL","expect_no_results":false},
+  {"id":"rag-09","question":"EX30 如何進行 OTA 軟體更新？","expected_route":"rag","expected_document_ids":["ex30-ota"],"expected_model":"EX30","expect_no_results":false},
+  {"id":"rag-10","question":"XC40 使用 DC 快充要注意什麼？","expected_route":"rag","expected_document_ids":[],"expected_model":"XC40","expect_no_results":true},
+  {"id":"rag-11","question":"XC60 的保固一定是幾年？","expected_route":"non_rag","expected_document_ids":[],"expected_model":"XC60","expect_no_results":true},
+  {"id":"rag-12","question":"EX40 現在有幾台模擬庫存？","expected_route":"non_rag","expected_document_ids":[],"expected_model":"EX40","expect_no_results":false},
+  {"id":"rag-13","question":"XC40 和 XC60 哪一台馬力比較高？","expected_route":"non_rag","expected_document_ids":[],"expected_model":"ALL","expect_no_results":false},
+  {"id":"rag-14","question":"高雄明天會下雨嗎？","expected_route":"non_rag","expected_document_ids":[],"expected_model":"ALL","expect_no_results":false}
+]

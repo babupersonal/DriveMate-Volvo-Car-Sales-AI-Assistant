@@ -1,8 +1,10 @@
 # DriveMate — Volvo 車型智慧客服（深度學習期中專題）
 
+[![CI](https://github.com/babupersonal/DriveMate-Volvo-Car-Sales-AI-Assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/babupersonal/DriveMate-Volvo-Car-Sales-AI-Assistant/actions/workflows/ci.yml)
+
 **學術獨立示範專案，非 Volvo 官方系統。** 使用 Volvo 台灣官網公開資料查詢車型與起始建議售價，搭配**虛構**庫存和**虛構**試乘需求。任何操作不會連結 Volvo 經銷商或下單。
 
-## 專題功能（第 0.4 版）
+## 專題功能（第 0.5 版）
 - React/Vite 聊天介面：開場白、範例問題、多輪訊息。
 - FastAPI + 本地 Ollama Agent：Tool Calling 自動選擇 `search_vehicles`、`get_vehicle_details`、`check_demo_stock`。
 - SQLite：車型公開資料 + **模擬**庫存 + **模擬**試乘預約紀錄。
@@ -10,6 +12,13 @@
 - 已有基本防亂編限制：LLM 沒有呼叫工具時，若問題符合明確模式，由後端備援路由使用相同的資料查詢工具，不讓 LLM 自行猜答案；無法安全辨識的問題仍會拒絕編造。
 - 聊天介面支援 Markdown 格式化顯示，並顯示 `LLM Tool Calling` 與 `後端備援路由` 的差別（**後端備援路由不是模型自主 Tool Calling**）。
 - **RAG 已實作**：本機 Embedding、向量檢索與公開文件摘要回答；需先執行 `python -m backend.app.rag --build`。
+- **可重跑評估**：14 題 RAG 題庫評估路由、檢索命中、車型隔離與來源引用。
+- **匿名可觀測性**：統計路由、工具、延遲與錯誤碼，不保存問題或回答內容。
+- **持續整合**：GitHub Actions 自動執行 28 項後端測試與前端 production build。
+
+## 架構定位
+
+DriveMate 是 **hybrid single-agent application（混合式單 Agent 應用）**，不是多 Agent 系統。單一客服 Agent 依問題使用 Tool Calling、RAG、模擬預約表單或確定性安全／備援路由。`config/agent_components.json` 用來公開記錄專業元件分工，並由後端啟動時驗證、由 `/api/system/components` 提供查詢。
 
 ## 環境準備（Mac / Conda）
 先確認已安裝 Python 3.11+、Node.js 18+、Ollama。建議使用你原有的 Conda 環境。
@@ -24,15 +33,19 @@ python -m pip install -r backend/requirements.txt
 # 3. 啟動／確認 Ollama；使用另一個終端開啟 Ollama 服務
 ollama serve
 
-# 4. 首次執行需要下載模型（可選擇已有模型）
+# 4. 首次執行需要下載對話與 Embedding 模型
 ollama pull qwen3:1.7b
+ollama pull qwen3-embedding:0.6b
 
-# 5. 開新終端，進入專案根目錄啟動後端
+# 5. 建立本機 RAG 向量索引
+python -m backend.app.rag --build
+
+# 6. 開新終端，進入專案根目錄啟動後端
 uvicorn backend.app.main:app --reload --port 8000
 
-# 6. 再開一個終端啟動前端
+# 7. 再開一個終端啟動前端
 cd frontend
-npm install
+npm ci
 npm run dev
 ```
 
@@ -47,6 +60,29 @@ npm run dev
 ```bash
 python -m pytest -q backend/tests
 ```
+
+目前預期結果為 `28 passed`。這些測試不需要 Ollama 或網路。
+
+## 執行 RAG 評估
+
+RAG 評估採用「題庫 + 目標函式 + 程式化評分」設計。請先啟動 Ollama 並建立向量索引：
+
+```bash
+# 路由、檢索命中率與車型隔離率
+python -m backend.evaluation.evaluate_rag
+
+# 再呼叫 Chat Model，檢查回答是否完整附上檢索來源
+python -m backend.evaluation.evaluate_rag --with-generation
+```
+
+評估結果輸出到 `artifacts/rag_eval_report.json`，此報告是本機執行產物，不提交 GitHub。
+
+## 路由統計與架構資訊
+
+- `GET /api/metrics/routes`：各路由使用次數、平均延遲、成功率與工具次數。
+- `GET /api/system/components`：讀取經驗證的專業元件分工。
+- 每次 `/api/chat` 回傳 `request_id`，方便對照錯誤紀錄。
+- 路由紀錄不保存使用者問題、回答、姓名或其他對話內容。
 
 ## 試乘模擬紀錄驗證
 在前端右側填寫虛構暱稱、未來日期、勾選「模擬」確認，會儲存到 SQLite。可以在 `http://127.0.0.1:8000/api/demo-bookings` 看到測試紀錄。**請勿輸入真實姓名、電話或其他個資**。
@@ -64,29 +100,53 @@ python -m pytest -q backend/tests
 DriveMate_Volvo_Midterm/
 ├── .env.example
 ├── .gitignore
+├── .github/workflows/ci.yml
 ├── README.md
+├── config/
+│   └── agent_components.json
 ├── data/
-│   ├── vehicles.csv                 # Volvo 官方公開規格/起售價（附來源）
-│   └── demo_stock.csv               # 模擬庫存
-├── docs/PROJECT_SCOPE.md
+│   ├── vehicles.csv
+│   ├── demo_stock.csv
+│   ├── rag_knowledge.json
+│   └── rag_eval.json
+├── docs/
+│   ├── PROJECT_SCOPE.md
+│   ├── AGENT_DESIGN.md
+│   └── CHANGELOG_v0.2～v0.5.md
 ├── backend/
 │   ├── requirements.txt
+│   ├── evaluation/
+│   │   └── evaluate_rag.py
 │   ├── app/
-│   │   ├── db.py                    # SQLite schema + seed
-│   │   ├── tools.py                 # 三個 Tool Calling 查詢工具
-│   │   ├── agent.py                 # Ollama tool loop + System Prompt
-│   │   ├── fallback_router.py       # 小模型未呼叫工具時的確定性備援
-│   │   └── main.py                  # FastAPI 與模擬預約
-│   └── tests/test_core.py
-└── frontend/                      # React/Vite 網頁
+│   │   ├── db.py
+│   │   ├── tools.py
+│   │   ├── agent.py
+│   │   ├── components.py
+│   │   ├── fallback_router.py
+│   │   ├── rag.py
+│   │   └── main.py
+│   └── tests/
+│       ├── test_core.py
+│       ├── test_rag.py
+│       ├── test_routing_v04.py
+│       └── test_observability.py
+└── frontend/
+    ├── package.json
+    └── src/
+        ├── App.jsx
+        └── style.css               # React/Vite 網頁
 ```
 
-## 預定後續工作
-1. 於本機完成 Ollama 對話測試，驗證小模型的真實工具呼叫比例與備援路由比例（已完成離線模擬，尚未在本環境連到你電腦上的 Ollama）。
-2. 修正錯誤的工具選擇與 Prompt，逐題紀錄測試結果。
-3. 已加入本地 RAG：9 篇 Volvo 官方支援頁面之原創摘要與來源網址、Embedding 與相似度檢索；必須另外建立索引並在自己的 Ollama 上驗證回答。
-4. 擷取真實運作的對話與模擬預約寫入畫面，完成老師提供的 `Midterm-Report-Template-EN.docx`。
-5. 推送到公開 GitHub 並以無痕模式確認可查看；`.env` 不要上傳。
+## 已完成驗證
+- 已完成本機 Ollama 對話測試
+- 已完成 Tool Calling 與 Python 備援路由測試
+- 已完成 RAG 索引、檢索與官方來源引用
+- 已完成模擬試乘資料庫寫入
+- 已完成 28 項後端自動化測試
+- 已完成 React production build
+- 已加入 GitHub Actions 自動驗證
+- 已加入 RAG 評估題庫與匿名路由統計
+- 已上傳公開 GitHub
 
 ## 官方資料引用
 [Volvo Taiwan City Cars](https://www.volvocars.com/tw/cars/city-cars/) · [Electric Cars](https://www.volvocars.com/tw/cars/electric-cars/) · [Family Cars](https://www.volvocars.com/tw/cars/family-cars/) · 更多逐筆官方資料請見 `data/vehicles.csv`。
@@ -162,3 +222,16 @@ uvicorn backend.app.main:app --reload --port 8000
 - EX30 充電線接頭損壞且使用者詢問能否自行清理時，若檢索段落確實有安全禁令，RAG 會先回覆明確禁止使用工具清理、停止使用損壞接頭並提供官方來源；若檢索不到支持資料就不生成這段指示。
 - 修改只涉及 Python 路由、RAG 回答、React 引導和測試；**RAG 知識庫本身未改動，不需要重建向量索引**。
 - 新版 API 版本為 `0.4.0`，查看 `/openapi.json` 即可確認。
+
+## v0.5 評估與可觀測性
+
+- 新增 GitHub Actions，自動執行 pytest 與 React build。
+- 新增 14 題 RAG 評估集與本機評估程式。
+- 新增匿名路由統計，不儲存對話內容。
+- 新增穩定錯誤碼，區分模型連線、RAG、資料庫與系統錯誤。
+- 新增專業元件分工 JSON；它描述混合式單 Agent 架構，不冒充多 Agent。
+- 新版 API 版本為 `0.5.0`，查看 `/openapi.json` 即可確認。
+
+詳細變更請見 `docs/CHANGELOG_v0.5.md`。
+
+Agent 的設計依據、評估方式與元件分工請見 `docs/AGENT_DESIGN.md`。
